@@ -1,0 +1,1 @@
+cat $1 | 2cmd recon-notify-script-amass.2cmd
