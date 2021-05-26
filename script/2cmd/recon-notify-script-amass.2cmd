@@ -1,1 +1,1 @@
-bash ~/tools/tom/script/recon-notify-script-amass.sh $2cmd$
+bash ~/Tools/tom/script/recon-notify-script-amass.sh $2cmd$
