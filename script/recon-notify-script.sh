@@ -49,7 +49,7 @@ echo -e "\e[1;34m\nRunning nuclei-templates updateing  for $1 *** \n \e[0m"
 nuclei -update-templates
 
 echo -e "\e[1;34m\nRunning nuclei-templates for $1 *** \n \e[0m"
-bash ~/script/nuclei.sh $1 | bash ~/tools/tom/script/notify.sh
+bash ~/script/nuclei.sh $1 | bash ~/Tools/tom/script/notify.sh
 
 echo -e "\e[1;34m\nRunning gau for $1 *** \n \e[0m"
 cat Recon/$1/$1-httprobe.txt | gau -o Recon/$1/$1-gau.txt
@@ -66,7 +66,7 @@ echo -r "\e[1;35m\nRunning $1-naabulist httprobe for $1 *** \n \e[0m"
 cat Recon/$1/$1-naabu.txt | httprobe -c 200 > Recon/$1/$1-naabu-httprobe.txt
 
 echo -r "\e[1;35m\nRunning $1-naabulist nuclei for $1 *** \n \e[0m"
-bash ~/script/naabu-nuclei.sh $1 | bash ~/tools/tom/script/naabu-notify.sh
+bash ~/script/naabu-nuclei.sh $1 | bash ~/Tools/tom/script/naabu-notify.sh
 
 echo -r "\e[1;35m\nRunning Subdoamin Takeover for $1 *** \n \e[0m"
-python3 ~/tools/subdover/subdover.py -t 200 -l Recon/$1/$1-httprobe.txt -o Recon/$1/$1-subdomain-takeover.txt
+python3 ~/Tools/subdover/subdover.py -t 200 -l Recon/$1/$1-httprobe.txt -o Recon/$1/$1-subdomain-takeover.txt
