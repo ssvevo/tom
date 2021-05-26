@@ -34,4 +34,4 @@ chmod +x install.sh
 
 bash ./install.sh
 
-cp ~/tools/tom/script/2cmd/* ~/tools/2cmd/2cmd.xmpls/
+cp ~/Tools/tom/script/2cmd/* ~/Tools/2cmd/2cmd.xmpls/
