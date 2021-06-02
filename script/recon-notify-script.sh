@@ -40,7 +40,7 @@ assetfinder --subs-only $1 > Recon/$1/$1-assefinder.txt
 echo -e "\e[1;34m\nRunning anew for $1 *** \n \e[0m"
 cat Recon/$1/*.txt | anew >  Recon/$1/$1-allDomain.txt
 
-rm -rf Recon/$1/$1-subdomains.txt Recon/$1/$1-subdomain.txt Recon/$1/$1-assefinder.txt 
+rm -rf Recon/$1/$1-subdomains.txt Recon/$1/$1-subdomain.txt Recon/$1/$1-assefinder.txt
 
 echo -e "\e[1;34m\nRunning httprobe for $1 *** \n \e[0m"
 cat Recon/$1/$1-allDomain.txt | httprobe -c 200 > Recon/$1/$1-httprobe.txt
@@ -49,24 +49,20 @@ echo -e "\e[1;34m\nRunning nuclei-templates updateing  for $1 *** \n \e[0m"
 nuclei -update-templates
 
 echo -e "\e[1;34m\nRunning nuclei-templates for $1 *** \n \e[0m"
-bash ~/script/nuclei.sh $1 | bash ~/Tools/tom/script/notify.sh
+bash ~/Tools/tom/script/nuclei.sh $1 | notify -silent
 
-echo -e "\e[1;34m\nRunning gau for $1 *** \n \e[0m"
-cat Recon/$1/$1-httprobe.txt | gau -o Recon/$1/$1-gau.txt
-
-echo -e "\e[1;34m\nRunning grap JS.Json endpoint for $1 *** \n \e[0m"
-cat Recon/$1/$1-gau.txt |  grep -P "\w+\.js(\?|$)" | tee Recon/$1/$1-js.txt && cat Recon/$1/$1-gau.txt | grep -P "\w+\.txt(\?|$)" | tee Recon/$1/$1-txt.txt && cat Recon/$1/$1-gau.txt |  grep -P "\w+\.json(\?|$)" | tee Recon/$1/$1-json.txt
-
-rm -rf Recon/$1/$1-gau.txt
+sleep 5
 
 echo -e "\e[1;35m\nRunning naabu for $1 *** \n \e[0m"
-cat  Recon/$1/$1-allDomain.txt |naabu -silent -o Recon/$1/$1-naabu.txt
+naabu  -iL Recon/$1/$1-allDomain.txt -silent -warm-up-time 4 -top-ports 10000 -verify -o Recon/$1/$1-naabu.txt
 
-echo -r "\e[1;35m\nRunning $1-naabulist httprobe for $1 *** \n \e[0m"
+echo -e "\e[1;35m\nRunning $1-naabulist httprobe for $1 *** \n \e[0m"
 cat Recon/$1/$1-naabu.txt | httprobe -c 200 > Recon/$1/$1-naabu-httprobe.txt
 
-echo -r "\e[1;35m\nRunning $1-naabulist nuclei for $1 *** \n \e[0m"
-bash ~/script/naabu-nuclei.sh $1 | bash ~/Tools/tom/script/naabu-notify.sh
+echo -e "\e[1;35m\nRunning $1-naabulist nuclei for $1 *** \n \e[0m"
+bash ~/Tools/tom/script/naabu-nuclei.sh $1 | notify -silent
 
-echo -r "\e[1;35m\nRunning Subdoamin Takeover for $1 *** \n \e[0m"
+echo -e "\e[1;35m\nRunning Subdoamin Takeover for $1 *** \n \e[0m"
 python3 ~/Tools/subdover/subdover.py -t 200 -l Recon/$1/$1-httprobe.txt -o Recon/$1/$1-subdomain-takeover.txt
+
+Echo " The End "
