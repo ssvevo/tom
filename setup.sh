@@ -39,3 +39,12 @@ cp ~/Tools/tom/script/2cmd/* ~/Tools/2cmd/2cmd.xmpls/
 GO111MODULE=on go get -v github.com/projectdiscovery/naabu/v2/cmd/naabu
 
 go get -u github.com/tomnomnom/httprobe
+
+cd ~/Tools/
+
+git clone https://github.com/PushpenderIndia/subdover.git
+
+cd subdover/
+chmod +x *
+
+Echo "The End"
