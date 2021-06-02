@@ -22,7 +22,7 @@ echo -e "\e[1;32m
 
 echo -e "\n\n"
 
-cd ~/tools/
+cd ~/Tools/
 
 git clone https://github.com/Zarcolio/2cmd.git
 
@@ -35,3 +35,7 @@ chmod +x install.sh
 bash ./install.sh
 
 cp ~/Tools/tom/script/2cmd/* ~/Tools/2cmd/2cmd.xmpls/
+
+GO111MODULE=on go get -v github.com/projectdiscovery/naabu/v2/cmd/naabu
+
+go get -u github.com/tomnomnom/httprobe
