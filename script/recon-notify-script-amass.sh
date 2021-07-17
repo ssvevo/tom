@@ -55,7 +55,6 @@ echo -e "\e[1;34m\nRunning nuclei-templates for $1 *** \n \e[0m"
 bash ~/Tools/tom/script/nuclei.sh $1 | notify -silent
 
 
-sleep 5
 
 echo -e "\e[1;35m\nRunning naabu for $1 *** \n \e[0m"
 naabu  -iL Recon/$1/$1-allDomain.txt -silent -warm-up-time 4 -top-ports 10000 -verify -o Recon/$1/$1-naabu.txt
