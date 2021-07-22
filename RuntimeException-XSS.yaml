@@ -1,0 +1,30 @@
+id: RuntimeException-XSS
+
+info:
+  name: RuntimeException Reflected Cross-Site Scripting (XSS)
+  author: Hackx
+  severity: medium
+  reference: %20<script>alert("xss")</script>
+  tags: xss
+
+requests:
+  - method: GET
+    path:
+      - '{{BaseURL}}/xyz.php'
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        words:
+          - "Uncaught RuntimeException"
+        part: body
+
+      - type: word
+        part: header
+        words:
+          - text/html
+
+      - type: status
+        status:
+          - 200
+
